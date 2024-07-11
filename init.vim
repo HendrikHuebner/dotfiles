@@ -23,7 +23,7 @@ let mapleader = ","
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Multi-cursor support
-Plug 'mg979/vim-visual-multi'
+Plug 'terryma/vim-multiple-cursors'
 
 " Gruvbox theme
 Plug 'morhetz/gruvbox'
@@ -51,22 +51,13 @@ call plug#end()
 syntax enable
 colorscheme gruvbox
 
-" Set up Telescope
-lua << EOF
-require('telescope').setup{
-  defaults = {
-    -- Telescope configuration options
-  }
-}
-EOF
-
 " Enable multi-cursor mappings
 let g:VM_maps = {}
 let g:VM_maps['Find Under'] = '<C-n>'
 let g:VM_maps['Find Subword Under'] = '<C-n>'
 
 " remaps
-"
+
 nnoremap <C-p> :Telescope find_files<CR>
 nnoremap <leader>fg :Telescope live_grep<CR>
 nnoremap <leader>fb :Telescope buffers<CR>
@@ -82,6 +73,16 @@ command! Wq wq
 
 " Hex edit
 command Hex %!xxd
+command UnHex %!xxd -r
+
+" Move line with Alt+(arrow/kj)
+nnoremap <A-Up> :m-2<CR>==
+inoremap <A-Up> <Esc>:m-2<CR>==gi
+nnoremap <A-Down> :m+<CR>==
+inoremap <A-Down> <Esc>:m+<CR>==gi
+
+nnoremap <A-k> :m-2<CR>==
+nnoremap <A-j> :m+<CR>==
 
 
 set undofile
